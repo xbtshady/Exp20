@@ -6,7 +6,7 @@ import org.litepal.crud.DataSupport;
  * Created by xbt on 2017/9/7.
  */
 
-public class province extends DataSupport {
+public class Province extends DataSupport {
 
     private int id;
 
