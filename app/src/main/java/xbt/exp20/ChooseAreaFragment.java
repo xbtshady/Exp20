@@ -103,29 +103,35 @@ public class ChooseAreaFragment extends android.support.v4.app.Fragment {
 
     public void onActivityCreated( Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        //列表的点击事件响应
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                //如果当前级别是省，那点击选取的就是某个省，而想要查询的是选中省有那些城市，市同理 ，想要查询这个城市有那些县
                 if(currentLevel == LEVEL_PROVINCE){
                     selectedProvince = provinceList.get(position);
-                    queryCities();
+                    queryCities();//查询全国所有的省，优先从数据库查询，如果没有查到再去服务器上查询
                 }else if(currentLevel == LEVEL_CITY){
                     selectedCity = cityList.get(position);
-                    queryCounties();
+                    queryCounties();//查询全国所有的省，优先从数据库查询，如果没有查到再去服务器上查询
                 }
             }
         });
+
+        //返回按钮相应
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //如果当前级别是市，点击返回就是想重新选省，县同理，想重新选市
                 if(currentLevel == LEVEL_COUNTY){
-                    queryCities();
+                    queryCities();//查询全国所有的省，优先从数据库查询，如果没有查到再去服务器上查询
                 }else if(currentLevel == LEVEL_CITY){
-                    queryProvinces();
+                    queryProvinces();//查询全国所有的省，优先从数据库查询，如果没有查到再去服务器上查询
                 }
             }
         });
-        queryProvinces();
+        queryProvinces();//活动刚启动，没有选取省市县就直接展示全国34个省
     }
 
     /**
