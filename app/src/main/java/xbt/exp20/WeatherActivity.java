@@ -213,32 +213,5 @@ public class WeatherActivity extends AppCompatActivity {
 
             });
         }
-//        Log.d("data","开始读取图片");
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try{
-//                    OkHttpClient client = new OkHttpClient();
-//                    Request request = new Request.Builder()
-//                            .url("http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US")
-//                            .build();
-//                    Response response = client.newCall(request).execute();
-//                    String responseData = response.body().string();
-//                    JSONArray jsonArray = new JSONArray(responseData);
-//                    JSONObject jsonObject = jsonArray.getJSONObject(0);
-//                    final String url = "http://s.cn.bing.net"+jsonObject.getString("url");
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            Log.d("222",url);
-//                            Glide.with(WeatherActivity.this).load(url).into(bingPicImg);
-//                        }
-//                    });
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
-//            }
-//        }).start();
-//    }
 }
 
