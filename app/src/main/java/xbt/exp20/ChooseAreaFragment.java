@@ -42,7 +42,7 @@ public class ChooseAreaFragment extends android.support.v4.app.Fragment {
 
     public static final int LEVEL_COUNTY = 2;
 
-    private ProgressBar progressDialog;
+    private ProgressBar mProgress;
 
     private TextView titleText;
 
@@ -96,7 +96,8 @@ public class ChooseAreaFragment extends android.support.v4.app.Fragment {
         titleText = (TextView) view.findViewById(R.id.title_text);
         backButton = (Button) view.findViewById(R.id.back_button);
         listView = (ListView) view.findViewById(R.id.list_view);
-            adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1,dataList);
+        mProgress = (ProgressBar) view.findViewById(R.id.progressBar);
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1,dataList);
         listView.setAdapter(adapter);
         return view;
     }
@@ -204,6 +205,7 @@ public class ChooseAreaFragment extends android.support.v4.app.Fragment {
      * 根据传入的地址和类型从服务器上查询省市县的数据
      */
     private void queryFromServer(String address, final String type){
+        mProgress.setVisibility(View.VISIBLE);
         HttpUtil.sendOkHttpRequest(address, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -228,6 +230,7 @@ public class ChooseAreaFragment extends android.support.v4.app.Fragment {
                     result = Utility.handleCountyResponse(responseText,selectedCity.getId());
                 }
                 if(result){
+                    mProgress.setVisibility(View.GONE);
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
