@@ -128,21 +128,6 @@ public class WeatherActivity extends AppCompatActivity {
                 requestWeather(weatherId);
             }
         }
-//        if(weatherString != null){
-//            //有缓存是直接解析天气数据
-//            Weather weather = Utility.handleWeatherResponse(weatherString);
-//            weatherId = weather.basic.weatherId;
-//            requestWeather(weatherId);
-//        } else {
-//            weatherId = getIntent().getStringExtra("weather_id");
-//            if (weatherId != null) {
-//                requestWeather(weatherId);
-//            } else {
-//                weatherId = "CN101091101";
-//                requestWeather(weatherId);
-//                Toast.makeText(WeatherActivity.this, "没有设置城市,默认显示秦皇岛", Toast.LENGTH_SHORT);
-//            }
-//        }
 
         //向下滑动刷新天气
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
@@ -156,6 +141,7 @@ public class WeatherActivity extends AppCompatActivity {
                     weatherId = "CN101091101";
                     requestWeather(weatherId);
                     Toast.makeText(WeatherActivity.this,"没有设置城市,默认显示秦皇岛",Toast.LENGTH_SHORT);
+                    loadBingPic();
                 }
             }
         });
