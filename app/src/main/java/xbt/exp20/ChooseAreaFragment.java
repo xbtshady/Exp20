@@ -119,8 +119,8 @@ public class ChooseAreaFragment extends android.support.v4.app.Fragment {
                     queryCounties();//查询全国所有的省，优先从数据库查询，如果没有查到再去服务器上查询
                 }else if(currentLevel == LEVEL_COUNTY){
                     String weatherId = countyList.get(position).getWeatherId();
-                    Intent intent = new Intent(getActivity(),WeatherActivity.class);
-                    intent.putExtra("weather_id",weatherId);
+                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                    intent.putExtra("weather_id", weatherId);
                     startActivity(intent);
                     getActivity().finish();
                 }
@@ -201,8 +201,8 @@ public class ChooseAreaFragment extends android.support.v4.app.Fragment {
             listView.setSelection(0);
             currentLevel = LEVEL_COUNTY;
         }else {
-            int cityCode = selectedCity.getCityCode();
             int provinceCode = selectedProvince.getProvinceCode();
+            int cityCode = selectedCity.getCityCode();
             String address = "http://guolin.tech/api/china/" + provinceCode + "/" + cityCode;
             queryFromServer(address, "county");
         }
@@ -212,7 +212,7 @@ public class ChooseAreaFragment extends android.support.v4.app.Fragment {
      * 根据传入的地址和类型从服务器上查询省市县的数据
      */
     private void queryFromServer(String address, final String type){
-        mProgress.setVisibility(View.VISIBLE);
+//        mProgress.setVisibility(View.VISIBLE);
         HttpUtil.sendOkHttpRequest(address, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -237,7 +237,7 @@ public class ChooseAreaFragment extends android.support.v4.app.Fragment {
                     result = Utility.handleCountyResponse(responseText,selectedCity.getId());
                 }
                 if(result){
-                    mProgress.setVisibility(View.GONE);
+//                    mProgress.setVisibility(View.GONE);
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
